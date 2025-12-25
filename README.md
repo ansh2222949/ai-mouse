@@ -32,7 +32,7 @@ Random Forest for confidence stabilization
 📦 Modular and clean code architecture
 
 🖥️ Fully offline operation
-
+```text
 🏗️ Project Architecture
 AI_MOUSE/
 ├── core/
@@ -45,8 +45,7 @@ AI_MOUSE/
 ├── main.py              # Real-time camera loop & orchestration
 ├── requirements.txt
 ├── README.md
-└── .gitignore
-
+```
 🧠 Why Hybrid ML (Not Deep Learning)?
 
 This problem demands:
@@ -80,34 +79,38 @@ Gestures are trained live during runtime and are user-specific.
 
 ▶️ How to Run
 1️⃣ Create & activate virtual environment
+```text
 py -3.10 -m venv .venv
 .venv\Scripts\activate
-
+```
 2️⃣ Install dependencies
+```text
 pip install -r requirements.txt
-
+```
 3️⃣ Run the system
+```text
 python main.py
-
+```
 ⌨️ Controls
+```text
 Key	Action
 1 / 2 / 3 / 4	Train gesture
 s	Save trained data
 r	Reset calibration
 ESC	Exit program
 ⚠️ Safety Warning
-
+```
 This project disables PyAutoGUI failsafe for smoother control:
 
 pyautogui.FAILSAFE = False
 
 
 ⚠️ If the mouse behaves unexpectedly:
-
+```text
 Press ESC
 
 Or Alt + Tab
-
+```
 Or close the OpenCV window immediately
 
 Use with caution. This behavior is intentional for experimentation.
