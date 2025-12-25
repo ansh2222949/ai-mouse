@@ -1,144 +1,157 @@
-🖱️ AI Mouse — Real-Time Hand Gesture Control
-(Computer Vision & Hybrid Machine Learning — Research Project)
+<div align="center">
+  <h1>🖱️ AI Mouse</h1>
+  <h3>Real-Time Hand Gesture Control System</h3>
+  <p>
+    <b>Computer Vision • Hybrid Machine Learning • Low Latency</b>
+  </p>
+  
+  <p>
+    <img src="https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+    <img src="https://img.shields.io/badge/ML-Hybrid%20(KNN%2BForest)-orange?style=for-the-badge" alt="Machine Learning">
+    <img src="https://img.shields.io/badge/Vision-MediaPipe-green?style=for-the-badge&logo=opencv" alt="Computer Vision">
+  </p>
+</div>
 
-AI Mouse is a real-time computer vision research project that explores mouse control using hand gestures captured via a webcam.
+---
 
-The system combines MediaPipe hand tracking with a hybrid machine learning approach (KNN + Random Forest) to achieve low-latency, stable, and adaptive gesture recognition.
+## 🧠 Project Overview
 
-This project focuses on system design, real-time performance, and practical ML decision-making, rather than deep learning or production deployment.
+**AI Mouse** is a real-time computer vision research project that explores mouse control using hand gestures captured via a standard webcam.
 
-✨ Features
+Unlike typical deep learning approaches, this system combines **MediaPipe** hand tracking with a **Hybrid Machine Learning architecture (KNN + Random Forest)**. This specific design choice ensures ultra-low latency, stability, and the ability to adapt to new gestures on the fly without heavy retraining.
 
-🎥 Real-time hand tracking using a standard webcam
+> 🎯 **Focus:** System design, real-time performance, and practical ML decision-making rather than deep learning complexity.
 
-✋ Gesture-based mouse control
+---
 
-Move
+## ✨ Key Features
 
-Scroll
+* **🎥 Real-Time Tracking:** Uses MediaPipe for robust hand landmark detection.
+* **✋ Gesture Control:** Full mouse navigation including **Move, Scroll, and Click**.
+* **🧠 Hybrid ML Engine:**
+    * **KNN:** For fast, online incremental adaptation.
+    * **Random Forest:** For stabilizing confidence scores.
+* **🎯 Smart Execution:** Temporal buffering to reduce jitter and false positives.
+* **📦 Modular Architecture:** Clean separation between vision, logic, and execution layers.
+* **🖥️ Fully Offline:** No internet connection required.
 
-Click
+---
 
-🧠 Hybrid ML decision system
+## 🧱 Technical Architecture
 
-KNN for fast online adaptation
+The system avoids deep learning to prioritize speed and interpretability.
 
-Random Forest for confidence stabilization
-
-🔁 Incremental training during runtime
-
-🎯 Confidence-based action execution
-
-📦 Modular and clean code architecture
-
-🖥️ Fully offline operation
 ```text
-🏗️ Project Architecture
 AI_MOUSE/
+│
 ├── core/
-│   ├── config.py        # System & gesture configuration
+│   ├── config.py        # System sensitivity & configuration
 │   ├── features.py      # Hand landmark feature extraction
-│   ├── model.py         # Hybrid KNN + RandomForest logic
-│   ├── actions.py       # Mouse / scroll / click execution
+│   ├── model.py         # Hybrid KNN + Random Forest logic
+│   ├── actions.py       # PyAutoGUI execution (Mouse/Click)
 │   └── __init__.py
 │
-├── main.py              # Real-time camera loop & orchestration
-├── requirements.txt
-├── README.md
+├── main.py              # Camera loop & orchestration
+├── requirements.txt     # Dependencies
+└── README.md            # Documentation
+
 ```
-🧠 Why Hybrid ML (Not Deep Learning)?
 
-This problem demands:
+### 🧠 Why Hybrid ML? (The Research Angle)
 
-⚡ Ultra-low latency
+This problem demands **ultra-low latency** and **online learning**. Deep learning models often introduce unnecessary overhead.
 
-🧩 Online / incremental learning
+1. **KNN (K-Nearest Neighbors):** Allows for instant adaptation to a specific user's hand shape.
+2. **Random Forest:** Acts as a stabilizer to filter out noise from the webcam.
+3. **Result:** A system that is faster and more responsive than heavy neural networks for this specific task.
 
-🧠 Interpretability and control
+---
 
-Deep learning models introduce unnecessary latency and complexity for this use case.
+## 🧪 Gestures & Controls
 
-Instead, this project uses:
+Gestures are trained **live** during runtime to match the user's specific hand.
 
-KNN for instant adaptation to new gestures
+| ID | Gesture Name | Action |
+| --- | --- | --- |
+| **1** | **MOVE** | Cursor follows hand movement |
+| **2** | **SCROLL** | Scroll Up / Down |
+| **3** | **CLICK** | Left Mouse Click |
+| **4** | **IDLE** | No Action (Safety state) |
 
-Random Forest for stabilizing predictions
+### ⌨️ Keyboard Controls
 
-Temporal buffering to reduce jitter
+| Key | Function |
+| --- | --- |
+| `1` / `2` / `3` / `4` | **Train** the respective gesture (Hold to capture data) |
+| `s` | **Save** trained model data locally |
+| `r` | **Reset** / Clear current calibration |
+| `ESC` | **Exit** the program |
 
-This design makes the system fast, robust, and practical for real-time interaction.
+---
 
-🧪 Gestures
-Key	Gesture	Action
-1	MOVE	Mouse movement
-2	SCROLL	Scroll up / down
-3	CLICK	Mouse click
-4	IDLE	No action
+## 🚀 How to Run
 
-Gestures are trained live during runtime and are user-specific.
+### 1️⃣ Prerequisites
 
-▶️ How to Run
-1️⃣ Create & activate virtual environment
-```text
+* Python 3.10+
+* A working Webcam
+
+### 2️⃣ Installation
+
+```bash
+# Create Virtual Environment
 py -3.10 -m venv .venv
 .venv\Scripts\activate
-```
-2️⃣ Install dependencies
-```text
+
+# Install Dependencies
 pip install -r requirements.txt
+
 ```
-3️⃣ Run the system
-```text
+
+### 3️⃣ Execution
+
+```bash
 python main.py
+
 ```
-⌨️ Controls
-```text
-Key	Action
-1 / 2 / 3 / 4	Train gesture
-s	Save trained data
-r	Reset calibration
-ESC	Exit program
-⚠️ Safety Warning
+
+---
+
+## ⚠️ Safety & Warning
+
+This project creates a virtual mouse interface. To ensure smooth movement, the failsafe is disabled:
+`pyautogui.FAILSAFE = False`
+
+**If the mouse behaves unexpectedly or gets stuck:**
+
+1. Press **`ESC`** immediately to kill the script.
+2. Or press **`Alt + Tab`** to switch windows.
+3. Or close the **OpenCV window**.
+
+> *Use with caution. This behavior is intentional for experimentation.*
+
+---
+
+## 📌 Notes
+
+* **User Specific:** Trained data (`.pkl`) is specific to your hand and lighting conditions. It is not synced to Git.
+* **OS:** Designed and tested on **Windows**.
+* **Scope:** This is an experimental research project, not intended for production accessibility tools.
+
+---
+
+## 🔮 Future Improvements
+
+* [ ] Visual overlays for gesture confidence.
+* [ ] Dynamic sensitivity tuning via GUI.
+* [ ] Comparative latency study against CNN models.
+
+---
+
+<div align="center">
+<b>Shared for Educational & Research Purposes</b>
+</div>
+
 ```
-This project disables PyAutoGUI failsafe for smoother control:
 
-pyautogui.FAILSAFE = False
-
-
-⚠️ If the mouse behaves unexpectedly:
-```text
-Press ESC
-
-Or Alt + Tab
 ```
-Or close the OpenCV window immediately
-
-Use with caution. This behavior is intentional for experimentation.
-
-📌 Notes
-
-Trained gesture data (.pkl) is user-specific and intentionally ignored in GitHub
-
-Webcam is required
-
-Designed and tested on Windows
-
-Not intended for accessibility or production use
-
-🚀 Future Improvements
-
-Gesture visualization overlays
-
-Dynamic sensitivity tuning
-
-GUI-based training interface
-
-Comparative study with deep learning models
-
-🧠 Key Takeaway
-
-AI Mouse demonstrates that classical machine learning combined with computer vision and careful system design can outperform deep learning for real-time, interactive human–computer interfaces.
-
-📜 License
-
-This project is shared for educational and experimental purposes only.
